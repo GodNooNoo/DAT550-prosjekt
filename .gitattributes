@@ -1,2 +1,0 @@
-test_videos/** filter=lfs diff=lfs merge=lfs -text
-train_sample_videos/** filter=lfs diff=lfs merge=lfs -text
