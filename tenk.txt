@@ -1,0 +1,10 @@
+CNN
+
+GAN
+
+https://github.com/oidelima/Deepfake-Detection
+RCN
+R3D
+MC3
+R2Plus1D
+I3D
