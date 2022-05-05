@@ -1,3 +1,6 @@
+https://arxiv.org/pdf/1909.11573.pdf
+
+# Detection across video frames
 CNN
 
 GAN
@@ -12,6 +15,14 @@ I3D
 LRCN
 
 
+# Detection within video frames
+CNN -> VGG16, ResNet50, ResNet101, ResNet152
 
+MesoNet, Meso-4, MesoInception-4, HeadPose, two stream NN
 
-https://arxiv.org/pdf/1909.11573.pdf
+SVM
+
+PRNU
+
+Siamese Network
+
