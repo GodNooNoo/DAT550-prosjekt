@@ -8,3 +8,10 @@ R3D
 MC3
 R2Plus1D
 I3D
+
+LRCN
+
+
+
+
+https://arxiv.org/pdf/1909.11573.pdf
