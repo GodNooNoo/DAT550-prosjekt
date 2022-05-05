@@ -5,6 +5,8 @@ CNN
 
 GAN
 
+MTCNN
+
 https://github.com/oidelima/Deepfake-Detection
 RCN
 R3D
