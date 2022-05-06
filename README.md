@@ -2,11 +2,12 @@
 This projects aims to detect deepfakes. It compares the accuracy of different models.
 
 # Requirements
+
  - Download and install Cmake from https://cmake.org/download/
  - Install requirements.txt
 
 
-    pip install -r requirements.txt
+		pip install -r requirements.txt
 
 # Step 1: Download the dataset
 We use the dataset from https://www.kaggle.com/competitions/deepfake-detection-challenge/data.
