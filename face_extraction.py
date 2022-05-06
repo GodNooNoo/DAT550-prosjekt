@@ -14,12 +14,11 @@ def video_to_frames(path_to_videos_folder, path_to_frames_folder):
         vid = cv.VideoCapture(video)
         count = 0
         while True:
-            count += 1
             success, image = vid.read()
             if not success:
                 break
             cv.imwrite(os.path.join(frames_folder, "frame{:d}.jpg".format(count)), image)
-    return count
+    return len(videos)
 
 def extract_faces(path_to_frames_folder, path_to_faces_folder):
     # Get all the folders in the frames_folder
@@ -56,8 +55,8 @@ if __name__ == '__main__':
     if not os.path.isdir(path_to_faces_folder):
         os.mkdir(path_to_faces_folder)
     # Extract the frames
-    num_frames = video_to_frames(path_to_videos_folder, path_to_frames_folder)
-    print("Extracted {} frames".format(num_frames))
+    num_vids = video_to_frames(path_to_videos_folder, path_to_frames_folder)
+    print("Extracted frames from {} videos".format(num_vids))
     # Extract the faces
     extract_faces(path_to_frames_folder, path_to_faces_folder)
     print("Extracted faces")
