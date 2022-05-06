@@ -130,5 +130,5 @@ dmypy.json
 
 
 # video folders
-.test_videos/
-.train_sample_videos/
+test_videos
+train_sample_videos
