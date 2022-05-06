@@ -30,6 +30,7 @@ def extract_faces(path_to_frames_folder, path_to_faces_folder):
             os.mkdir(faces_folder)
         # Get all the frames in the folder
         frames = [os.path.join(folder, f) for f in os.listdir(folder) if f.endswith('.jpg')]
+        face_count = 0
         for frame in frames:
             # Get the image
             img = face_recognition.load_image_file(frame)
@@ -37,12 +38,13 @@ def extract_faces(path_to_frames_folder, path_to_faces_folder):
             face_locations = face_recognition.face_locations(img)
             # For each face in the image
             for face_location in face_locations:
+                face_count += 1
                 # Get the top, right, bottom, left
                 top, right, bottom, left = face_location
                 # Crop the face
                 face = img[top:bottom, left:right]
                 # Save the face
-                cv.imwrite(os.path.join(faces_folder, os.path.basename(frame)), face)
+                cv.imwrite(os.path.join(faces_folder, "face{:d}.jpg".format(face_count)), face)
 
 
 if __name__ == '__main__':
