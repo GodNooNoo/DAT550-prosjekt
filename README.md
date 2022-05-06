@@ -5,6 +5,7 @@ This projects aims to detect deepfakes. It compares the accuracy of different mo
  - Download and install Cmake from https://cmake.org/download/
  - Install requirements.txt
 
+
     pip install -r requirements.txt
 
 # Step 1: Download the dataset
