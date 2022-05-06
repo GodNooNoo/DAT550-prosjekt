@@ -11,7 +11,7 @@ def video_to_frames(path_to_videos_folder, path_to_frames_folder):
         if not os.path.isdir(frames_folder):
             os.mkdir(frames_folder)
         # Extract the frames
-        vid = cv.VideoCapture(path_to_videos_folder)
+        vid = cv.VideoCapture(video)
         count = 0
         while True:
             count += 1
@@ -47,9 +47,14 @@ def extract_faces(path_to_frames_folder, path_to_faces_folder):
 
 
 if __name__ == '__main__':
-    path_to_videos_folder = './videos'
-    path_to_frames_folder = './frames'
-    path_to_faces_folder = './faces'
+    path_to_videos_folder = './sample_set'
+
+    path_to_frames_folder = './sample_frames'
+    if not os.path.isdir(path_to_frames_folder):
+        os.mkdir(path_to_frames_folder)
+    path_to_faces_folder = './sample_faces'
+    if not os.path.isdir(path_to_faces_folder):
+        os.mkdir(path_to_faces_folder)
     # Extract the frames
     num_frames = video_to_frames(path_to_videos_folder, path_to_frames_folder)
     print("Extracted {} frames".format(num_frames))
