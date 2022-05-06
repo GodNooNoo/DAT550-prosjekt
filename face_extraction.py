@@ -3,16 +3,12 @@ import cv2 as cv
 import os
 import face_recognition
 
-"""
-This script splits the videos into frames and extracts the faces from the frames. 
-It also creates a folder for each video and each video has a folder for each frame.
-
-Args:
-    name (string): Name of the folder holding the videos.
-"""
+PATH_VIDS = ''
+PATH_FRAMES = ''
+PATH_FACES = ''
 
 
-def video_to_frames(path_to_videos_folder, path_to_frames_folder):
+def video_to_frames():
     """
     This function splits the videos into frames and saves the frames in the frames folder.
 
@@ -23,12 +19,16 @@ def video_to_frames(path_to_videos_folder, path_to_frames_folder):
     Returns:
         int: Count of videos converted to frames.
     """
-    videos = [os.path.join(path_to_videos_folder, vid) for vid in os.listdir(
-        path_to_videos_folder) if vid.endswith('.mp4')]
+
+    if not os.path.isdir(PATH_FRAMES):
+        os.mkdir(PATH_FRAMES)
+
+    videos = [os.path.join(PATH_VIDS, vid) for vid in os.listdir(
+        PATH_VIDS) if vid.endswith('.mp4')]
     for video in videos:
         # Create a folder for each video
         frames_folder = os.path.join(
-            path_to_frames_folder, os.path.basename(video)[:-4])
+            PATH_FRAMES, os.path.basename(video)[:-4])
         if not os.path.isdir(frames_folder):
             os.mkdir(frames_folder)
         # Extract the frames
@@ -43,27 +43,31 @@ def video_to_frames(path_to_videos_folder, path_to_frames_folder):
     return len(videos)
 
 
-def extract_faces(path_to_frames_folder, path_to_faces_folder):
+def extract_faces():
     """
-    This function extracts the faces from the frames and saves the faces in the faces folder.
+    This function extracts the faces from the frames in the frames folder and saves the faces in the faces folder.
 
     Args:
         path_to_frames_folder (string): Path to the frames folder.
         path_to_faces_folder (string): Path to the faces folder.
-    """    
+    """
+
+    if not os.path.isdir(PATH_FRAMES):
+        os.mkdir(PATH_FRAMES)
+
     # Get all the folders in the frames_folder
-    folders = [os.path.join(path_to_frames_folder, f) for f in os.listdir(
-        path_to_frames_folder) if os.path.isdir(os.path.join(path_to_frames_folder, f))]
+    folders = [os.path.join(PATH_FRAMES, f) for f in os.listdir(
+        PATH_FRAMES) if os.path.isdir(os.path.join(PATH_FRAMES, f))]
     for folder in folders:
         # Create a folder for each video
         faces_folder = os.path.join(
-            path_to_faces_folder, os.path.basename(folder))
+            PATH_FRAMES, os.path.basename(folder))
         if not os.path.isdir(faces_folder):
             os.mkdir(faces_folder)
         # Get all the frames in the folder
         frames = [os.path.join(folder, f)
                   for f in os.listdir(folder) if f.endswith('.jpg')]
-        
+
         for frame in frames:
             # Get the image
             img = face_recognition.load_image_file(frame)
@@ -79,23 +83,22 @@ def extract_faces(path_to_frames_folder, path_to_faces_folder):
                 face = img[top:bottom, left:right]
                 # Save the face
                 cv.imwrite(os.path.join(faces_folder, os.path.basename(
-                    frame)[:-4] + "_face{face_count}.jpg"), face)
+                    frame)[:-4] + f"_face{face_count}.jpg"), face)
 
 
 if __name__ == '__main__':
+    if len(sys.argv) != 2:
+        print("Usage: python face_extraction.py <path_to_videos_folder>")
+        sys.exit(1)
 
-    path_to_videos_folder = f'./{sys.argv[1]}'
-    path_to_frames_folder = f'./{sys.argv[1]}_frames'
-    path_to_faces_folder = f'./{sys.argv[1]}_faces'
-
-    if not os.path.isdir(path_to_frames_folder):
-        os.mkdir(path_to_frames_folder)
-    if not os.path.isdir(path_to_faces_folder):
-        os.mkdir(path_to_faces_folder)
+    PATH_VIDS = sys.argv[1]
+    PATH_FRAMES = os.path.join(PATH_VIDS, "_frames")
+    PATH_FACES = os.path.join(PATH_VIDS, "_faces")
 
     # Extract the frames
-    num_vids = video_to_frames(path_to_videos_folder, path_to_frames_folder)
+    num_vids = video_to_frames()
     print("Extracted frames from {} videos".format(num_vids))
+
     # Extract the faces
-    extract_faces(path_to_frames_folder, path_to_faces_folder)
+    extract_faces()
     print("Extracted faces")
