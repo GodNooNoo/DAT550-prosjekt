@@ -92,8 +92,8 @@ if __name__ == '__main__':
         sys.exit(1)
 
     PATH_VIDS = sys.argv[1]
-    PATH_FRAMES = os.path.join(PATH_VIDS, "_frames")
-    PATH_FACES = os.path.join(PATH_VIDS, "_faces")
+    PATH_FRAMES = os.path.join(PATH_VIDS, "frames")
+    PATH_FACES = os.path.join(PATH_VIDS, "faces")
 
     # Extract the frames
     num_vids = video_to_frames()
