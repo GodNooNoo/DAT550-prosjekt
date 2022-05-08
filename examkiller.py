@@ -9,7 +9,7 @@ def get_response(question):
     engine="text-davinci-002",
     prompt=question,
     temperature=0.7,
-    max_tokens=256,
+    max_tokens=2560,
     top_p=1,
     frequency_penalty=0,
     presence_penalty=0
