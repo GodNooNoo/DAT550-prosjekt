@@ -14,7 +14,6 @@ dist/
 downloads/
 eggs/
 .eggs/
-*.h5
 lib/
 lib64/
 data/
@@ -137,3 +136,4 @@ dmypy.json
 test_videos
 train_sample_videos
 sample_submission.csv
+*.h5
