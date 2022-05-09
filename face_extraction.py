@@ -55,7 +55,9 @@ def extract_faces_optimized():
                 # Get the top, right, bottom, left
                 top, right, bottom, left = face
                 # Crop the face with padding of 30 pixels
-                face = frame[top - 30 : bottom + 30, left - 30 : right + 30]
+                face = frame[top - 15 : bottom + 15, left - 15 : right + 15]
+                if face.size == 0:
+                    continue
                 cv.imwrite(os.path.join(folder, f"frame{idx}face{i}.jpg"), face)
 
 
