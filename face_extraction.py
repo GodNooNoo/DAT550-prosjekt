@@ -45,9 +45,9 @@ def extract_faces_optimized():
             success, image = vid.read()
             if not success:
                 break
-            image = cv2.resize(image, (0, 0), fx=0.25, fy=0.25)
+            image = cv2.resize(image, (0, 0), fx=0.5, fy=0.5)
             frames.append(image)
-        for frame in tqdm(frames):
+        for idx, frame in enumerate(tqdm(frames)):
             # extract the faces
             faces = face_recognition.face_locations(frame)
             # For each face in the image
@@ -56,8 +56,7 @@ def extract_faces_optimized():
                 top, right, bottom, left = face
                 # Crop the face with padding of 30 pixels
                 face = frame[top - 30 : bottom + 30, left - 30 : right + 30]
-                # Save the face
-                cv.imwrite(os.path.join(folder, f"face{i}.jpg"), face)
+                cv.imwrite(os.path.join(folder, f"frame{idx}face{i}.jpg"), face)
         vid.release()
 
 
