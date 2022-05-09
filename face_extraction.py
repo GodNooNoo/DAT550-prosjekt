@@ -16,7 +16,7 @@ def extract_faces_optimized():
     """
     This function extracts the faces from the frames in the videos and saves it to the real or fake folder.
     """
-    METADATA = pd.read_json("sample_set/metadata.json")
+    METADATA = pd.read_json(os.path.join(PATH_VIDS, "metadata.json"))
 
     if not os.path.isdir(PATH_REAL):
         os.mkdir(PATH_REAL)
@@ -45,7 +45,7 @@ def extract_faces_optimized():
             success, image = vid.read()
             if not success:
                 break
-            image = cv2.resize(image, (0, 0), fx=0.5, fy=0.5)
+            image = cv2.resize(image, (0, 0), fx=0.25, fy=0.25)
             frames.append(image)
         for idx, frame in enumerate(tqdm(frames)):
             # extract the faces
@@ -57,7 +57,6 @@ def extract_faces_optimized():
                 # Crop the face with padding of 30 pixels
                 face = frame[top - 30 : bottom + 30, left - 30 : right + 30]
                 cv.imwrite(os.path.join(folder, f"frame{idx}face{i}.jpg"), face)
-        vid.release()
 
 
 if __name__ == "__main__":
