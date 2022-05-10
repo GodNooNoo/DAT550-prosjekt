@@ -45,7 +45,7 @@ def extract_faces_optimized():
             success, image = vid.read()
             if not success:
                 break
-            image = cv2.resize(image, (0, 0), fx=0.25, fy=0.25)
+            image = cv2.resize(image, (0, 0), fx=0.5, fy=0.5)
             frames.append(image)
         for idx, frame in enumerate(tqdm(frames)):
             # extract the faces
