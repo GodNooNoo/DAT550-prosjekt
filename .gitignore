@@ -18,8 +18,11 @@ lib/
 lib64/
 data/
 train/
+test/
 data_faces/
 data_frames/
+train_frames/
+test_frames/
 parts/
 sdist/
 var/
