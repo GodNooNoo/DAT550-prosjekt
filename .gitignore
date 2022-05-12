@@ -142,3 +142,4 @@ train_sample_videos
 sample_submission.csv
 *.h5
 test_set
+test_set_frames
