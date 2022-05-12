@@ -141,3 +141,4 @@ test_videos
 train_sample_videos
 sample_submission.csv
 *.h5
+test_set

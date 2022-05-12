@@ -45,7 +45,7 @@ def extract_faces_optimized():
             success, image = vid.read()
             if not success:
                 break
-            image = cv2.resize(image, (0, 0), fx=0.25, fy=0.25)
+            image = cv2.resize(image, (0, 0), fx=0.5, fy=0.5)
             frames.append(image)
         for idx, frame in enumerate(tqdm(frames)):
             # extract the faces
@@ -61,6 +61,17 @@ def extract_faces_optimized():
                 cv.imwrite(os.path.join(folder, f"frame{idx}face{i}.jpg"), face)
 
 
+def remove_empty_folders(path):
+    """
+    This function removes empty folders.
+    """
+    folders = list(os.walk(path))[1:]
+    for folder in folders:
+        if not folder[2]:
+            os.rmdir(folder[0])
+            print("removed:", folder[0])
+
+
 if __name__ == "__main__":
     if len(sys.argv) != 2:
         print("Usage: python face_extraction.py <path_to_videos_folder>")
@@ -71,3 +82,5 @@ if __name__ == "__main__":
     PATH_FAKE = os.path.join(PATH_VIDS, "fake")
 
     extract_faces_optimized()
+    remove_empty_folders(PATH_REAL)
+    remove_empty_folders(PATH_FAKE)
