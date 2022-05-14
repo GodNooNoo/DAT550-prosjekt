@@ -143,3 +143,6 @@ sample_submission.csv
 *.h5
 test_set
 test_set_frames
+test_set_faces
+train_set_frames
+train_set_faces
